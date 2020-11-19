@@ -1,6 +1,6 @@
 package com.yuansong.tools.db;
 
-public interface IDBConfig {
+public interface IDbConnConfig {
 	
 	public String getName();
 	public String getServer();

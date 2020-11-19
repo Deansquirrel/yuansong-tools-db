@@ -1,6 +1,6 @@
-package com.yuansong.tools.db;
+package com.yuansong.tools.db.impl;
 
-public class DynamicDataSourceContextHolder {
+class DynamicDataSourceContextHolder {
 	
 	private final ThreadLocal<String> contetHolder = new ThreadLocal<String>() {
 

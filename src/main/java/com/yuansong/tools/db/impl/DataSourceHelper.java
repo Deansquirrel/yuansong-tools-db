@@ -1,4 +1,4 @@
-package com.yuansong.tools.db;
+package com.yuansong.tools.db.impl;
 
 import java.text.MessageFormat;
 
@@ -7,11 +7,15 @@ import javax.sql.DataSource;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.yuansong.tools.db.DataSourceType;
+import com.yuansong.tools.db.IDataSourceHelper;
+import com.yuansong.tools.db.IDbConnConfig;
 
 @Component
-public class DataSourceHelper {
+class DataSourceHelper implements IDataSourceHelper {
 	
-	public DataSource getDataSource(IDBConfig config, DataSourceType type) throws Exception {
+	@Override
+	public DataSource getDataSource(IDbConnConfig config, DataSourceType type) throws Exception {
 		DruidDataSource ds = new DruidDataSource();
 		if(config.getName() != null && config.getName().trim() != "") {
 			ds.setName(config.getName().trim());
@@ -45,7 +49,7 @@ public class DataSourceHelper {
 	 * @param ds
 	 * @throws Exception
 	 */
-	private void subSetDataSource(DruidDataSource ds) throws Exception {
+	private void subSetDataSource(DruidDataSource ds) {
 		ds.setMinIdle(0);
 		ds.setInitialSize(1);
 		ds.setMaxActive(30);

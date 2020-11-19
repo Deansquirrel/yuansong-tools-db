@@ -1,13 +1,15 @@
-package com.yuansong.tools.db;
+package com.yuansong.tools.db.impl;
 
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-@Component
-public class DBConfigHelper {
+import com.yuansong.tools.db.IDbConnConfig;
 
-	public IDBConfig getMssqlDbConfig(
+@Component
+class DBConfigHelper {
+
+	public IDbConnConfig getMssqlDbConfig(
 			@Nullable String name,
 			@NonNull String server,
 			@NonNull String dbName,
@@ -16,7 +18,7 @@ public class DBConfigHelper {
 		return this.getDbConfig(name, server, dbName, username, password);
 	}
 	
-	public IDBConfig getMysqlDbConfig(
+	public IDbConnConfig getMysqlDbConfig(
 			@Nullable String name,
 			@NonNull String server,
 			@NonNull String dbName,
@@ -25,11 +27,11 @@ public class DBConfigHelper {
 		return this.getDbConfig(name, server, dbName, username, password);
 	}
 	
-	public IDBConfig getSQLiteDbConfig(@NonNull String path) {
+	public IDbConnConfig getSQLiteDbConfig(@NonNull String path) {
 		return this.getSQLiteDbConfig(null, path, null, null);
 	}
 	
-	public IDBConfig getSQLiteDbConfig(
+	public IDbConnConfig getSQLiteDbConfig(
 			@Nullable String name,
 			@NonNull String path,
 			@Nullable String username,
@@ -37,13 +39,13 @@ public class DBConfigHelper {
 		return this.getDbConfig(name, path, null, username, password);
 	}
 	
-	private IDBConfig getDbConfig(
+	private IDbConnConfig getDbConfig(
 			String name,
 			String server,
 			String dbName,
 			String username,
 			String password) {
-		return new IDBConfig() {
+		return new IDbConnConfig() {
 
 			@Override
 			public String getName() {

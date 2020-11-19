@@ -1,4 +1,4 @@
-package com.yuansong.tools.db;
+package com.yuansong.tools.db.impl;
 
 import javax.sql.DataSource;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Component
-public class DbBean {
+class ToolsDbBean {
 	
 	@Bean(name = "dynamicDataSourceContextHolderDynamic")
 	public DynamicDataSourceContextHolder getDynamicDataSourceContextHolder() {
