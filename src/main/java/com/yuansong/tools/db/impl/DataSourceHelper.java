@@ -58,7 +58,7 @@ class DataSourceHelper implements IDataSourceHelper {
 		ds.setValidationQuery("SELECT 'X'");
 		ds.setTimeBetweenEvictionRunsMillis(60000);
 		ds.setMinEvictableIdleTimeMillis(30000);
-		ds.setTimeBetweenConnectErrorMillis(5 * 60 * 1000);
+		ds.setTimeBetweenConnectErrorMillis(15 * 1000);
 	}
 
 }
