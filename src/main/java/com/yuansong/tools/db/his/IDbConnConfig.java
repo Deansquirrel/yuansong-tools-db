@@ -1,4 +1,4 @@
-package com.yuansong.tools.db;
+package com.yuansong.tools.db.his;
 
 public interface IDbConnConfig {
 	

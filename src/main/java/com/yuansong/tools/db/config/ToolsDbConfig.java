@@ -1,17 +1,17 @@
-package com.yuansong.tools.db.impl;
+package com.yuansong.tools.db.config;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
-@Component
-class ToolsDbBean {
-	
+@Configuration
+public class ToolsDbConfig {
+
 	@Bean(name = "dynamicDataSourceContextHolderDynamic")
 	public DynamicDataSourceContextHolder getDynamicDataSourceContextHolder() {
 		return new DynamicDataSourceContextHolder();
@@ -31,5 +31,5 @@ class ToolsDbBean {
 	public PlatformTransactionManager getTxManager(@Qualifier("dynamicRoutingDataSourceDynamic") DataSource ds) {
 		return new DataSourceTransactionManager(ds);
 	}
-
+	
 }

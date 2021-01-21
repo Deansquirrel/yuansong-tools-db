@@ -1,4 +1,4 @@
-package com.yuansong.tools.db.impl;
+package com.yuansong.tools.db.config;
 
 class DynamicDataSourceContextHolder {
 	

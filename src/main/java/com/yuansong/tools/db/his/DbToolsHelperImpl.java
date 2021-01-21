@@ -1,4 +1,4 @@
-package com.yuansong.tools.db.impl;
+package com.yuansong.tools.db.his;
 
 import javax.sql.DataSource;
 
@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.yuansong.tools.db.DataSourceType;
-import com.yuansong.tools.db.IDataSourceHelper;
-import com.yuansong.tools.db.IDbConnConfig;
-import com.yuansong.tools.db.IDbToolsHelper;
+import com.yuansong.tools.db.config.DynamicRoutingDataSource;
 
 @Component
 class DbToolsHelperImpl implements IDbToolsHelper {
@@ -31,10 +28,10 @@ class DbToolsHelperImpl implements IDbToolsHelper {
 		this.dynamicRoutingDataSource.setDataSourceKey(key);
 	}
 	
-	@Override
-	public void addDataSource(String key, IDbConnConfig config, DataSourceType type) throws Exception {		
-		this.addDataSource(key, this.dataSourceHelper.getDataSource(config, type));
-	}
+//	@Override
+//	public void addDataSource(String key, IDbConnConfig config, DataSourceType type) throws Exception {		
+//		this.addDataSource(key, this.dataSourceHelper.getDataSource(config, type));
+//	}
 
 	@Override
 	public void remove() {

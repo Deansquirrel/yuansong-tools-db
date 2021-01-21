@@ -1,4 +1,4 @@
-package com.yuansong.tools.db;
+package com.yuansong.tools.db.his;
 
 import javax.sql.DataSource;
 
@@ -12,7 +12,7 @@ public interface IDbToolsHelper {
 	
 	public void addDataSource(String key, DataSource dataSource);
 	
-	public void addDataSource(String key, IDbConnConfig config, DataSourceType type) throws Exception;
+//	public void addDataSource(String key, IDbConnConfig config, DataSourceType type) throws Exception;
 	
 	public void removeDataSource(String key);
 	

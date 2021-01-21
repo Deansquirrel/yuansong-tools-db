@@ -1,4 +1,4 @@
-package com.yuansong.tools.db.impl;
+package com.yuansong.tools.db.config;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,7 +13,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
-class DynamicRoutingDataSource extends AbstractRoutingDataSource {
+public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
 	private final Logger logger = LoggerFactory.getLogger(DynamicRoutingDataSource.class);
 	

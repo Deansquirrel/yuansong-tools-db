@@ -1,10 +1,8 @@
-package com.yuansong.tools.db.impl;
+package com.yuansong.tools.db.his;
 
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-
-import com.yuansong.tools.db.IDbConnConfig;
 
 @Component
 class DBConfigHelper {

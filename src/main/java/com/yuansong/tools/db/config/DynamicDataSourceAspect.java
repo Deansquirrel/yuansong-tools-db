@@ -1,4 +1,4 @@
-package com.yuansong.tools.db.aop;
+package com.yuansong.tools.db.config;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.yuansong.tools.db.IDbToolsHelper;
+import com.yuansong.tools.db.his.IDbToolsHelper;
+import com.yuansong.tools.db.his.TargetSource;
 
 @Aspect
 @Order(-1)
 @Component
-public class DynamicDataSourceAspect {
+class DynamicDataSourceAspect {
 
 	@Autowired
 	private IDbToolsHelper dbToolsHelper;
