@@ -3,7 +3,6 @@ package com.yuansong.tools.db.conn;
 public class MSSqlConnInfo extends BaseConnInfo {
 
 	private String server;
-	private Integer port;
 	private String dbName;
 	private String userName;
 	private String password;
@@ -18,7 +17,6 @@ public class MSSqlConnInfo extends BaseConnInfo {
 			String password) {
 		super(name);
 		this.server = server;
-		this.port = port;
 		this.dbName = dbName;
 		this.userName = userName;
 		this.password = password;
@@ -29,12 +27,6 @@ public class MSSqlConnInfo extends BaseConnInfo {
 	}
 	public void setServer(String server) {
 		this.server = server;
-	}
-	public Integer getPort() {
-		return port;
-	}
-	public void setPort(Integer port) {
-		this.port = port;
 	}
 	public String getDbName() {
 		return dbName;

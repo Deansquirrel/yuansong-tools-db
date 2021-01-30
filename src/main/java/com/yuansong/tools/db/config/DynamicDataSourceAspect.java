@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.yuansong.tools.db.his.IDbToolsHelper;
-import com.yuansong.tools.db.his.TargetSource;
+import com.yuansong.tools.db.IToolsDbHelper;
+import com.yuansong.tools.db.TargetSource;
 
 @Aspect
 @Order(-1)
@@ -17,19 +17,19 @@ import com.yuansong.tools.db.his.TargetSource;
 class DynamicDataSourceAspect {
 
 	@Autowired
-	private IDbToolsHelper dbToolsHelper;
+	private IToolsDbHelper toolsDbHelper;
 		
 	@Pointcut("@annotation(com.yuansong.tools.db.aop.TargetSource)")
     public void pointCut() {}
 	
 	@Before("pointCut() && @annotation(targetSource)")
 	public void doBefore(TargetSource targetSource) {
-		this.dbToolsHelper.setDataSourceKey(targetSource.value());
+		this.toolsDbHelper.setDataSourceKey(targetSource.value());
 	}
 
 	@After("pointCut() && @annotation(targetSource)")
 	public void doAfter(TargetSource targetSource) {
-		this.dbToolsHelper.remove();
+		this.toolsDbHelper.remove();
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.yuansong.tools.db.his;
+package com.yuansong.tools.db;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
