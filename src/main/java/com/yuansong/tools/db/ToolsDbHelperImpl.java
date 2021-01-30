@@ -59,6 +59,16 @@ class ToolsDbHelperImpl implements IToolsDbHelper {
 		this.dynamicRoutingDataSource.remove();
 	}
 	
+//	case Mssql:
+//	return MessageFormat.format("jdbc:sqlserver://{0};DatabaseName={1}", server, dbName);
+//case SQLite:
+//	return MessageFormat.format("jdbc:sqlite:{0}", server);
+//case MySQL:
+//	return MessageFormat.format("jdbc:mysql://{0}/{1}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull", server, dbName);
+//	default:
+//		throw new Exception(MessageFormat.format("unsupported database type [{0}]", type));
+//}
+	
 	private DataSource getDataSource(MSSqlConnInfo config) {
 		DruidDataSource ds = new DruidDataSource();
 		if(config.getName() != null && "".equals(ds.getName().trim())) {
