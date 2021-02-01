@@ -11,7 +11,6 @@ public class MSSqlConnInfo extends BaseConnInfo {
 	public MSSqlConnInfo(
 			String name,
 			String server, 
-			Integer port, 
 			String dbName, 
 			String userName, 
 			String password) {
