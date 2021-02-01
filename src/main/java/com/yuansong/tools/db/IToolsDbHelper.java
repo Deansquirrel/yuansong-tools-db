@@ -23,8 +23,6 @@ public interface IToolsDbHelper {
 	 */
 	public JdbcTemplate getJdbcTemplate();
 	
-
-	
 	/**
 	 * 添加数据源
 	 * @param key
@@ -45,8 +43,6 @@ public interface IToolsDbHelper {
 	default public void addDataSource(@NonNull String key, @NonNull SQLiteConnInfo config) {
 		this.addDataSource(key, config, null);
 	}
-	
-	//TODO sqlite mysql 待补充
 	
 	public void removeDataSource(@NonNull String key);
 	
