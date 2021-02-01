@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.yuansong.tools.db.config.DynamicRoutingDataSource;
 import com.yuansong.tools.db.conn.MSSqlConnInfo;
+import com.yuansong.tools.db.conn.MySqlConnInfo;
+import com.yuansong.tools.db.conn.SQLiteConnInfo;
 
 @Component
 class ToolsDbHelperImpl implements IToolsDbHelper {
@@ -30,8 +32,18 @@ class ToolsDbHelperImpl implements IToolsDbHelper {
 	}
 
 	@Override
-	public void addDataSource(String key, MSSqlConnInfo config) {
-		this.dynamicRoutingDataSource.addDataSource(key, this.getDataSource(config));
+	public void addDataSource(String key, MSSqlConnInfo config, Integer timeout) {
+		this.dynamicRoutingDataSource.addDataSource(key, this.getDataSource(config, timeout));
+	}
+	
+	@Override
+	public void addDataSource(String key, MySqlConnInfo config, Integer timeout) {
+		this.dynamicRoutingDataSource.addDataSource(key, this.getDataSource(config, timeout));
+	}
+	
+	@Override
+	public void addDataSource(String key, SQLiteConnInfo config, Integer timeout) {
+		this.dynamicRoutingDataSource.addDataSource(key, this.getDataSource(config, timeout));
 	}
 
 	@Override
@@ -58,29 +70,48 @@ class ToolsDbHelperImpl implements IToolsDbHelper {
 	public void remove() {
 		this.dynamicRoutingDataSource.remove();
 	}
-	
-//	case Mssql:
-//	return MessageFormat.format("jdbc:sqlserver://{0};DatabaseName={1}", server, dbName);
-//case SQLite:
-//	return MessageFormat.format("jdbc:sqlite:{0}", server);
-//case MySQL:
-//	return MessageFormat.format("jdbc:mysql://{0}/{1}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull", server, dbName);
-//	default:
-//		throw new Exception(MessageFormat.format("unsupported database type [{0}]", type));
-//}
-	
-	private DataSource getDataSource(MSSqlConnInfo config) {
+		
+	private DataSource getDataSource(MSSqlConnInfo config, Integer queryTimeout) {
 		DruidDataSource ds = new DruidDataSource();
 		if(config.getName() != null && "".equals(ds.getName().trim())) {
 			ds.setName(config.getName().trim());
 		}
+		ds.setDriver(null);
 		ds.setUrl(MessageFormat.format("jdbc:sqlserver://{0};DatabaseName={1}", config.getServer(), config.getDbName()));
+		ds.setUsername(config.getUserName());
 		if(config.getPassword() != null) {
 			ds.setPassword(config.getPassword());
 		} else {
 			ds.setPassword("");
 		}
-		this.subSetDataSource(ds);
+		this.subSetDataSource(ds, queryTimeout);
+		return ds;
+	}
+	
+	private DataSource getDataSource(MySqlConnInfo config, Integer queryTimeout) {
+		DruidDataSource ds = new DruidDataSource();
+		if(config.getName() != null && "".equals(ds.getName().trim())) {
+			ds.setName(config.getName().trim());
+		}
+		ds.setUrl(MessageFormat.format("jdbc:mysql://{0}/{1}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull", 
+				config.getServer(), config.getDbName()));
+		ds.setUsername(config.getUserName());
+		if(config.getPassword() != null) {
+			ds.setPassword(config.getPassword());
+		} else {
+			ds.setPassword("");
+		}
+		this.subSetDataSource(ds, queryTimeout);
+		return ds;
+	}
+	
+	private DataSource getDataSource(SQLiteConnInfo config, Integer queryTimeout) {
+		DruidDataSource ds = new DruidDataSource();
+		if(config.getName() != null && "".equals(ds.getName().trim())) {
+			ds.setName(config.getName().trim());
+		}
+		ds.setUrl(MessageFormat.format("jdbc:sqlite:{0}", config.getPath()));
+		this.subSetDataSource(ds, queryTimeout);
 		return ds;
 	}
 	
@@ -89,16 +120,20 @@ class ToolsDbHelperImpl implements IToolsDbHelper {
 	 * @param ds
 	 * @throws Exception
 	 */
-	private void subSetDataSource(DruidDataSource ds) {
+	private void subSetDataSource(DruidDataSource ds, Integer queryTimeout) {
 		ds.setMinIdle(0);
 		ds.setInitialSize(1);
 		ds.setMaxActive(30);
 		ds.setMaxWait(10000);
-		ds.setQueryTimeout(3600);
-		ds.setValidationQuery("SELECT 'X'");
+		if(queryTimeout == null) {
+			ds.setQueryTimeout(IToolsDbHelper.DEFAULT_QUERYTIMEOUT);
+		} else {
+			ds.setQueryTimeout(queryTimeout);
+		}
+		ds.setValidationQuery("SELECT 1");
 		ds.setTimeBetweenEvictionRunsMillis(60000);
 		ds.setMinEvictableIdleTimeMillis(30000);
 		ds.setTimeBetweenConnectErrorMillis(15 * 1000);
-	} 
+	}
 
 }

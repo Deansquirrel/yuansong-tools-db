@@ -71,6 +71,9 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 	 * @param dataSource
 	 */
 	public synchronized void addDataSource(String key, DataSource dataSource) {
+		if(this.targetDataSources.containsKey(key)) {
+			return;
+		}
 		this.targetDataSources.put(key, dataSource);
 		this.afterPropertiesSet();
 		logger.debug("datasource {} has been added", key);
@@ -82,10 +85,12 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 	 */
 	public synchronized void removeDataSource(String key) {
 		DruidDataSource dataSource = (DruidDataSource) this.targetDataSources.get(key);
-		this.targetDataSources.remove(key);
-		dataSource.close();
-		dataSource = null;
-		this.afterPropertiesSet();
+		if(this.targetDataSources.containsKey(key)) {
+			this.targetDataSources.remove(key);
+			dataSource.close();
+			dataSource = null;
+			this.afterPropertiesSet();			
+		}
 		logger.debug("datasource {} has been removed", key);
 	}
 	/**

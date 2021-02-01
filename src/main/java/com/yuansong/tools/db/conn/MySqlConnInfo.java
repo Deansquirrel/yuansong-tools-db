@@ -1,0 +1,48 @@
+package com.yuansong.tools.db.conn;
+
+public class MySqlConnInfo extends BaseConnInfo {
+
+	private String server;
+	private String dbName;
+	private String userName;
+	private String password;
+	
+	public MySqlConnInfo() {}
+	public MySqlConnInfo(
+			String name,
+			String server, 
+			String dbName, 
+			String userName, 
+			String password) {
+		super(name);
+		this.server = server;
+		this.dbName = dbName;
+		this.userName = userName;
+		this.password = password;
+	}
+	public String getServer() {
+		return server;
+	}
+	public void setServer(String server) {
+		this.server = server;
+	}
+	public String getDbName() {
+		return dbName;
+	}
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+}

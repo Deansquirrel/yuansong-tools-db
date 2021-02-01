@@ -19,7 +19,7 @@ class DynamicDataSourceAspect {
 	@Autowired
 	private IToolsDbHelper toolsDbHelper;
 		
-	@Pointcut("@annotation(com.yuansong.tools.db.aop.TargetSource)")
+	@Pointcut("@annotation(com.yuansong.tools.db.TargetSource)")
     public void pointCut() {}
 	
 	@Before("pointCut() && @annotation(targetSource)")
