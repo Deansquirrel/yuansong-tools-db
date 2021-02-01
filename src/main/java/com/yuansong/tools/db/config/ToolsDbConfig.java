@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.yuansong.tools.db.IToolsDbHelper;
+
 @Configuration
 public class ToolsDbConfig {
 
@@ -22,12 +24,12 @@ public class ToolsDbConfig {
 		return DynamicRoutingDataSource.createDynamicRoutingDataSource(dynamicDataSourceContextHolder);
 	}
 	
-	@Bean(name="jdbcTemplateDynamic")
+	@Bean(name=IToolsDbHelper.BEAN_JDBCTEMPLATE)
 	public JdbcTemplate getJdbcTemplate(@Qualifier("dynamicRoutingDataSourceDynamic") DataSource ds) {
 		return new JdbcTemplate(ds);
 	}
 	
-	@Bean(name="txManagerDynamic")
+	@Bean(name=IToolsDbHelper.BEAN_TX_MANAGER)
 	public PlatformTransactionManager getTxManager(@Qualifier("dynamicRoutingDataSourceDynamic") DataSource ds) {
 		return new DataSourceTransactionManager(ds);
 	}
