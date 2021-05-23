@@ -1,6 +1,6 @@
-package com.yuansong.tools.db.conn;
+package com.yuansong.tools.db;
 
-public class SQLiteConnInfo extends BaseConnInfo {
+class SQLiteConnInfo extends BaseConnInfo {
 
 	private String path;
 	

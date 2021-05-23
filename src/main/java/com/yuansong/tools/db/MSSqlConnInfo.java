@@ -1,6 +1,6 @@
-package com.yuansong.tools.db.conn;
+package com.yuansong.tools.db;
 
-public class MSSqlConnInfo extends BaseConnInfo {
+class MSSqlConnInfo extends BaseConnInfo {
 
 	private String server;
 	private String dbName;

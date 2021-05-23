@@ -1,4 +1,4 @@
-package com.yuansong.tools.db.config;
+package com.yuansong.tools.db;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -7,9 +7,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import com.yuansong.tools.db.IToolsDbHelper;
-import com.yuansong.tools.db.TargetSource;
 
 @Aspect
 @Order(-1)

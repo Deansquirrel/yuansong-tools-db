@@ -1,6 +1,6 @@
-package com.yuansong.tools.db.conn;
+package com.yuansong.tools.db;
 
-public class MySqlConnInfo extends BaseConnInfo {
+class MySqlConnInfo extends BaseConnInfo {
 
 	private String server;
 	private String dbName;

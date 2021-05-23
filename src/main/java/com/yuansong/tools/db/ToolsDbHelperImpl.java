@@ -10,10 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.yuansong.tools.db.config.DynamicRoutingDataSource;
-import com.yuansong.tools.db.conn.MSSqlConnInfo;
-import com.yuansong.tools.db.conn.MySqlConnInfo;
-import com.yuansong.tools.db.conn.SQLiteConnInfo;
 
 @Component
 class ToolsDbHelperImpl implements IToolsDbHelper {
@@ -30,20 +26,21 @@ class ToolsDbHelperImpl implements IToolsDbHelper {
 	public JdbcTemplate getJdbcTemplate() {
 		return this.jdbcTemplate;
 	}
-
-	@Override
-	public void addDataSource(String key, MSSqlConnInfo config, Integer timeout) {
-		this.dynamicRoutingDataSource.addDataSource(key, this.getDataSource(config, timeout));
-	}
 	
 	@Override
-	public void addDataSource(String key, MySqlConnInfo config, Integer timeout) {
-		this.dynamicRoutingDataSource.addDataSource(key, this.getDataSource(config, timeout));
-	}
-	
-	@Override
-	public void addDataSource(String key, SQLiteConnInfo config, Integer timeout) {
-		this.dynamicRoutingDataSource.addDataSource(key, this.getDataSource(config, timeout));
+	public void addDataSource(String key, BaseConnInfo config, Integer queryTimeout) {
+		if(config instanceof MSSqlConnInfo) {
+			this.dynamicRoutingDataSource.addDataSource(key, this.getDataSource((MSSqlConnInfo)config, queryTimeout));
+			return;
+		}
+		if(config instanceof MySqlConnInfo) {
+			this.dynamicRoutingDataSource.addDataSource(key, this.getDataSource((MySqlConnInfo)config, queryTimeout));
+			return;
+		}
+		if(config instanceof SQLiteConnInfo) {
+			this.dynamicRoutingDataSource.addDataSource(key, this.getDataSource((SQLiteConnInfo)config, queryTimeout));
+			return;
+		}
 	}
 
 	@Override
@@ -134,6 +131,8 @@ class ToolsDbHelperImpl implements IToolsDbHelper {
 		ds.setTimeBetweenEvictionRunsMillis(60000);
 		ds.setMinEvictableIdleTimeMillis(30000);
 		ds.setTimeBetweenConnectErrorMillis(15 * 1000);
+		//设置登录超时，避免连接信息错误时，一直等待的问题
+		ds.setLoginTimeout(10);
 	}
 
 }

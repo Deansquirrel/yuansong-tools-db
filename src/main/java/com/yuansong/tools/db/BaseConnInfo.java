@@ -1,6 +1,6 @@
-package com.yuansong.tools.db.conn;
+package com.yuansong.tools.db;
 
-public abstract class BaseConnInfo {
+abstract class BaseConnInfo {
 	
 	public BaseConnInfo() {}
 	

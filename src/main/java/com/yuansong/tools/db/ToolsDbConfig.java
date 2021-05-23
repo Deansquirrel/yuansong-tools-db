@@ -1,4 +1,4 @@
-package com.yuansong.tools.db.config;
+package com.yuansong.tools.db;
 
 import javax.sql.DataSource;
 
@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import com.yuansong.tools.db.IToolsDbHelper;
 
 @Configuration
 public class ToolsDbConfig {

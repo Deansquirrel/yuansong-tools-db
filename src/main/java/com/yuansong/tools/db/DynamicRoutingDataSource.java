@@ -1,4 +1,4 @@
-package com.yuansong.tools.db.config;
+package com.yuansong.tools.db;
 
 import java.util.HashMap;
 import java.util.HashSet;
