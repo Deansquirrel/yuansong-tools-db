@@ -90,7 +90,7 @@ class ToolsDbHelperImpl implements IToolsDbHelper {
 		if(config.getName() != null && "".equals(ds.getName().trim())) {
 			ds.setName(config.getName().trim());
 		}
-		ds.setUrl(MessageFormat.format("jdbc:mysql://{0}/{1}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull", 
+		ds.setUrl(MessageFormat.format("jdbc:mysql://{0}/{1}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=CONVERT_TO_NULL", 
 				config.getServer(), config.getDbName()));
 		ds.setUsername(config.getUserName());
 		if(config.getPassword() != null) {
