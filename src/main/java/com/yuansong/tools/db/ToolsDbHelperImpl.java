@@ -108,8 +108,12 @@ class ToolsDbHelperImpl implements IToolsDbHelper {
 			ds.setName(config.getName().trim());
 		}
 		ds.setUrl(MessageFormat.format("jdbc:sqlite:{0}", config.getPath()));
-		this.subSetDataSource(ds, queryTimeout);
+		this.subSetDataSource(ds, queryTimeout, 1);
 		return ds;
+	}
+	
+	private void subSetDataSource(DruidDataSource ds, Integer queryTimeout) {
+		this.subSetDataSource(ds, queryTimeout, 30);
 	}
 	
 	/**
@@ -117,10 +121,10 @@ class ToolsDbHelperImpl implements IToolsDbHelper {
 	 * @param ds
 	 * @throws Exception
 	 */
-	private void subSetDataSource(DruidDataSource ds, Integer queryTimeout) {
+	private void subSetDataSource(DruidDataSource ds, Integer queryTimeout, int maxActive) {
 		ds.setMinIdle(0);
 		ds.setInitialSize(1);
-		ds.setMaxActive(30);
+		ds.setMaxActive(maxActive);
 		ds.setMaxWait(10000);
 		if(queryTimeout == null) {
 			ds.setQueryTimeout(IToolsDbHelper.DEFAULT_QUERYTIMEOUT);
